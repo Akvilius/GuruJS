@@ -2,7 +2,7 @@
 // Подключение тестов
 import { test, expect } from '@playwright/test';
 
-import { UserBuilder, ArticleBuilder, commentBuilder, CommentBuilder} from '../src/helpers/builder/index';
+import { UserBuilder, ArticleBuilder, CommentBuilder} from '../src/helpers/builder/index';
 import { MainPage, RegPage, YoufeedPage, EditorPage, ArticlePage, SettingPage, LoginPage } from '../src/pages/index';
 
 
