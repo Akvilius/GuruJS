@@ -11,10 +11,10 @@ export class SettingPage {
         this.updateSettingButton =page.getByRole('button', { name: 'Update Settings' });
     }
 
-    async updatePassword (newpassword) {
+    async updatePassword (newPassword) {
 
         await this.passwordField.click();
-        await this.passwordField.fill(newpassword);
+        await this.passwordField.fill(newPassword);
         await this.updateSettingButton.click();
     }
 
