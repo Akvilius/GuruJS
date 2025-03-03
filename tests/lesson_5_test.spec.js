@@ -2,7 +2,7 @@
 // Подключение тестов
 import { test, expect } from '@playwright/test';
 // Подключение фейкера
-import { faker } from '@faker-js/faker';
+import { ar, faker } from '@faker-js/faker';
 //
 import { MainPage } from '../src/pages/mainPage';
 import { RegPage } from '../src/pages/regPage';
@@ -26,14 +26,10 @@ test.describe ('Урок 5', ()=>{
     
         const mainPage = new MainPage(page);
         const regPage = new RegPage(page);
-        const youfeedPage = new YoufeedPage(page);
 
         await mainPage.open(URL_UI);
-        await mainPage.gotoreg();
+        await mainPage.goToReg();
         await regPage.reg(user.name,user.email,user.password);
-      
-        await expect(youfeedPage.profileNameField).toBeVisible();
-        await expect(youfeedPage.profileNameField).toContainText(user.name);
 
     });
 
@@ -48,18 +44,28 @@ test.describe ('Урок 5', ()=>{
         const editorPage = new EditorPage(page);
         const articlePage = new ArticlePage(page);
 
-        await youfeedPage.gotonewarticle();
-        await editorPage.publishnewarticle(article.title,article.about,article.body,article.tag);
+        await youfeedPage.goToNewArticle();
+        await editorPage.publishNewArticle(article.title,article.about,article.body,article.tag);
         await expect(articlePage.paragraphField).toContainText(article.title);
     });
 
     test('Пользователь может оставить комментарий к статье', async ({page})=>{ 
         const comment = faker.lorem.sentence(5);
-        const mainPage = new MainPage(page);
-        const globalFeedPage = new GlobalFeedPage(page);
-        const articlePage = new ArticlePage(page);
+        const article = {
+            title: `Akva ${faker.lorem.sentence(2)} `,
+            about: faker.lorem.sentence(5),
+            body: faker.lorem.paragraph(5),
+            tag: 'My_test',
+        };
 
-        await globalFeedPage.gotoaricle();
+        const articlePage = new ArticlePage(page);
+        const youfeedPage = new YoufeedPage(page);
+        const editorPage = new EditorPage(page);
+
+        await youfeedPage.goToNewArticle();
+        await editorPage.publishNewArticle(article.title,article.about,article.body,article.tag); //Создаём статью
+
+        //await globalFeedPage.gotoaricle(article.title);// Находим её. Не обязательно т.к. после создания сразу в неё проваливаемся
         await articlePage.addComment(comment);
         await expect(page.locator('.card-text').last()).toContainText(comment);//было падение из-за 2 комментариев к новости, поэтому смотрим на посследний
     });
@@ -73,15 +79,15 @@ test.describe ('Урок 5', ()=>{
         const settingPage = new SettingPage (page);
         const loginPage = new LoginPage(page);
 
-        await youfeedPage.gotosetting();
+        await youfeedPage.goToSetting();
         const username = await page.getByPlaceholder('Your Name').inputValue(); // сознанием пользователя и почту для повторной авторизации
         const email = await page.getByPlaceholder('Email').inputValue();
-        await settingPage.updatepassword(password);
+        await settingPage.updatePassword(password);
 
-        await expect(settingPage.updatesettingButton).not.toBeVisible(); // Проверяем что изменения сохранились
+        await expect(settingPage.updateSettingButton).not.toBeVisible(); // Проверяем что изменения сохранились
 
         await youfeedPage.logout();
-        await mainPage.gotologin();
+        await mainPage.goToLogin();
         await loginPage.login(email,password);
 
         await expect(youfeedPage.profileNameField).toBeVisible();

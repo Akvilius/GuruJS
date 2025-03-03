@@ -8,14 +8,14 @@ export class SettingPage {
         //this.newarticleButton = page.getByRole('link', { name: 'New Article' });
 
         this.passwordField = page.getByPlaceholder('Password');
-        this.updatesettingButton =page.getByRole('button', { name: 'Update Settings' });
+        this.updateSettingButton =page.getByRole('button', { name: 'Update Settings' });
     }
 
-    async updatepassword (newpassword) {
+    async updatePassword (newpassword) {
 
         await this.passwordField.click();
         await this.passwordField.fill(newpassword);
-        await this.updatesettingButton.click();
+        await this.updateSettingButton.click();
     }
 
 }

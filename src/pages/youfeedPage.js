@@ -3,19 +3,19 @@ export class YoufeedPage {
     {
         this.page = page;
 
-        this.newarticleButton = page.getByRole('link', { name: 'New Article' });
+        this.newArticleButton = page.getByRole('link', { name: 'New Article' });
         this.settingButton = page.getByRole('link', { name: 'Settings' });
         this.logoutButton = page.getByRole('link', { name: 'Logout' });
 
         this.profileNameField = page.locator('.nav-link.dropdown-toggle.cursor-pointer'); //Элемент с именем пользователя для отрытия выпадающего списка
     }
 
-    async gotonewarticle () {
+    async goToNewArticle () {
 
-        await this.newarticleButton.click();
+        await this.newArticleButton.click();
     }
 
-    async gotosetting () {
+    async goToSetting () {
         await this.profileNameField.click();
         await this.settingButton.click();
     }

@@ -21,10 +21,6 @@ export class RegPage {
         await this.singupButton.click();
     }
 
-    async open (url) {
-        await this.page.goto(url);
-    }
-
 
 }
 

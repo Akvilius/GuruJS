@@ -4,20 +4,20 @@ export class MainPage {
         this.page = page;
         this.singupButton = page.getByRole('link', { name: 'Sign up' });
         this.loginButton = page.getByRole('link', { name: 'Login' });
-        this.newarticleButton = page.getByRole('link', { name: 'New Article' });
+        this.newArticleButton = page.getByRole('link', { name: 'New Article' });
     }
 
-    async gotoreg () {
+    async goToReg () {
 
         await this.singupButton.click();
     }
-    async gotologin () {
+    async goToLogin () {
 
         await this.loginButton.click();
     }
-    async gotopublishnewarticle () {
+    async goToPublishNewArticle () {
 
-        await this.newarticleButton.click();
+        await this.newArticleButton.click();
     }
 
     async open (url) {

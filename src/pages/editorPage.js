@@ -3,10 +3,7 @@ export class EditorPage {
     {
         this.page = page;
 
-        this.newarticleButton = page.getByRole('link', { name: 'New Article' });
-        this.publisharticleButton = page.getByRole('button', { name: 'Publish Article' });
-
-        this.profileNameField =  page.getByRole('navigation');
+        this.publishArticleButton = page.getByRole('button', { name: 'Publish Article' });
 
         this.tiltearticleField = page.getByPlaceholder('Article Title');
         this.aboutarticleField = page.getByPlaceholder('What\'s this article about?');
@@ -16,7 +13,7 @@ export class EditorPage {
 
     }
 
-    async publishnewarticle (title,about,body,tag) {
+    async publishNewArticle (title,about,body,tag) {
 
         await this.tiltearticleField.click();
         await this.tiltearticleField.fill(title);
@@ -26,6 +23,6 @@ export class EditorPage {
         await this.bodyarticleField.fill(body);
         await this.tagarticleField.click();
         await this.tagarticleField.fill(tag);
-        await this.publisharticleButton.click();
+        await this.publishArticleButton.click();
     }
 }
