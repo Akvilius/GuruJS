@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test lesson_6_test.spec.js",
+    "test": "npx playwright test",
     "ui": "npx playwright test --ui"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
     "@types/node": "^22.10.2"
   },
   "dependencies": {
-    "@faker-js/faker": "^9.5.0"
+    "@faker-js/faker": "^9.5.0",
+    "axios": "^1.8.2"
   }
 }
