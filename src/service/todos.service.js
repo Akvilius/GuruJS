@@ -1,3 +1,5 @@
+import { TodosBuilder } from "../helper/todos.builder";
+
 const URL = 'https://apichallenges.herokuapp.com/';
 
 export class TodosService {
@@ -8,51 +10,36 @@ export class TodosService {
 
     async getTodos(token) {
         const response = await this.request.get(`${URL}todos`,{
-            headers:{
-                'x-challenger': token,
-            }
+            headers: token,
         });
         return response;
     }
 
     async getTodo(token) {
         const response = await this.request.get(`${URL}todo`,{
-            headers:{
-                'x-challenger': token,
-            }
+            headers: token,
         });
         return response;
     }
 
     async getTodosId(token, id) {
         const response = await this.request.get(`${URL}todos/${id}`,{
-            headers:{
-                'x-challenger': token,
-            }
+            headers: token,
         });
         return response;
     }
 
     async getTodosFilter(token) {
         const response = await this.request.get(`${URL}todos?doneStatus=true`,{
-            headers:{
-                'x-challenger': token,
-            }
+            headers: token,
         });
         return response;
     }
 
-    async postTodos(token) {
+    async postTodos(token, body) {
         const response = await this.request.post(`${URL}todos`,{
-            headers:{
-                'x-challenger': token,
-            },
-            data: 
-                {
-                    'title': 'create todo process payroll',
-                    'doneStatus': true,
-                    'description': ''
-                }
+            headers:token,
+            data: body
         });
         return response;
     }
@@ -66,4 +53,33 @@ export class TodosService {
         return response;
     }
 
+    async putTodos(token, body, id) {
+        const response = await this.request.put(`${URL}todos/${id}`,{
+            headers:{
+                'x-challenger': token,
+            },
+            data: body
+        });
+        return response;
+    }
+
+    async postTodosId(token, body, id) {
+        const response = await this.request.post(`${URL}todos/${id}`,{
+            headers:{
+                'x-challenger': token,
+            },
+            data: body
+        });
+        return response;
+    }
+
+    async deleteTodos(token, id) {
+        const response = await this.request.delete(`${URL}todos/${id}`,{
+            headers:{
+                'x-challenger': token,
+            }
+        });
+        return response;
+    }
+        
 }
