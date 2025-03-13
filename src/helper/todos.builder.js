@@ -5,7 +5,7 @@ export class TodosBuilder {
         if (length == -1) 
         this.title = 'create todo process payroll';
         else
-        this.title =faker.string.symbol(length);
+        this.title =faker.string.alpha(length);
         return this;
     }
     addDoneStatus(status = true){
@@ -16,18 +16,10 @@ export class TodosBuilder {
         if (length == -1)
         this.description = '';
         else
-        this.description =faker.string.symbol(length);
+        this.description =faker.string.alpha(length);
         return this;
     }
-    /*
-    genereteATodos(){
-        return{
-            title: this.title,
-            doneStatus: this.doneStatus,
-            description: this.description
-        };
-    }
-        */
+
     genereteTodos(){
         const todos = {
             title: this.title,
