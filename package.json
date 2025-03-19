@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
-    "testui": "npx playwright test --ui"
+    "ui": "npx playwright test --ui"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "@types/node": "^22.10.2"
   },
   "dependencies": {
-    "@faker-js/faker": "^9.5.0"
+    "@faker-js/faker": "^9.5.0",
+    "axios": "^1.8.2"
   }
 }
