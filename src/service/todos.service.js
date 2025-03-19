@@ -46,18 +46,14 @@ export class TodosService {
 
     async headTodos(token) {
         const response = await this.request.head(`${URL}todos`,{
-            headers:{
-                'x-challenger': token,
-            }
+            headers:token
         });
         return response;
     }
 
     async putTodos(token, body, id) {
         const response = await this.request.put(`${URL}todos/${id}`,{
-            headers:{
-                'x-challenger': token,
-            },
+            headers:token,
             data: body
         });
         return response;
@@ -65,9 +61,7 @@ export class TodosService {
 
     async postTodosId(token, body, id) {
         const response = await this.request.post(`${URL}todos/${id}`,{
-            headers:{
-                'x-challenger': token,
-            },
+            headers:token,
             data: body
         });
         return response;
@@ -75,9 +69,7 @@ export class TodosService {
 
     async deleteTodos(token, id) {
         const response = await this.request.delete(`${URL}todos/${id}`,{
-            headers:{
-                'x-challenger': token,
-            }
+            headers:token
         });
         return response;
     }

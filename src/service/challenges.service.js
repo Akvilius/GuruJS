@@ -8,9 +8,7 @@ export class ChallengesService {
 
     async get(token) {
         const response = await this.request.get(`${URL}challenges`,{
-            headers:{
-                'x-challenger': token,
-            }
+            headers: token
         });
         return response;
     }
