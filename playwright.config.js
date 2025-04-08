@@ -1,6 +1,7 @@
 // @ts-check
-const { defineConfig, devices } = require('@playwright/test');
-
+//const { defineConfig, devices } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
+import * as os from "node:os";
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -22,7 +23,18 @@ module.exports = defineConfig({
   //workers: process.env.CI ? 1 : undefined,
   workers:1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['html',{open: 'never'}],
+            ['line'],
+            ['allure-playwright', {
+              environmentInfo: {
+                os_platform: os.platform(),
+                os_release: os.release(),
+                os_version: os.version(),
+                node_version: process.version,
+              },
+            },
+          ]
+        ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -30,6 +42,7 @@ module.exports = defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
 
   /* Configure projects for major browsers */

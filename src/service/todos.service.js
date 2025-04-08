@@ -1,5 +1,5 @@
 import { TodosBuilder } from "../helper/todos.builder";
-
+import { test } from '@playwright/test';
 const URL = 'https://apichallenges.herokuapp.com/';
 
 export class TodosService {
@@ -60,10 +60,14 @@ export class TodosService {
     }
 
     async postTodosId(token, body, id) {
-        const response = await this.request.post(`${URL}todos/${id}`,{
+        let response;
+        await test.step('Получить по id', async() =>{ //Группировка для отчёта
+        response = await this.request.post(`${URL}todos/${id}`,{
             headers:token,
             data: body
         });
+        return response;
+        })
         return response;
     }
 

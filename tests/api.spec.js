@@ -3,6 +3,7 @@
 import { test, expect } from '@playwright/test';
 import { ChallengerService, ChallengesService, TodosService, HeartbeatService, SecretService }  from '../src/service/index';
 import { TodosBuilder, HeaderBuilder } from '../src/helper/index';
+import * as allure from "allure-js-commons";
 
 // вынести в конфиги
 let token;
@@ -157,10 +158,20 @@ test.describe ('Challenge', ()=>{
         const body = new TodosBuilder().addTitle().addDoneStatus().addDescription().genereteTodos();
         const todoidService = new TodosService(request);
         const response = await todoidService.postTodosId(header,body,1);
-        expect (response.status()).toBe(200);
+        await test.step('Проверяем, что код 200', async() =>{ //Группировка для отчёта
+        expect (response.status()).toBe(200);});
     });
 //18
     test('POST /todos/{id} (404)', {tag: '@UpdatePOST'}, async ({request})=>{ 
+        await allure.epic("Получить по ID");
+        await allure.feature("Получение");
+        await allure.story("Получил по ид");
+
+        //await allure.displayName("Test Authentication");
+        await allure.owner("John Doe");
+        await allure.tags("Web interface", "Authentication");
+        await allure.severity("critical");
+
         const header = new HeaderBuilder().addToken(token).genereteHeader();
         const body = new TodosBuilder().addTitle().addDoneStatus().addDescription().genereteTodos();
         const todoidService = new TodosService(request);
